@@ -1,0 +1,59 @@
+type Course{
+    courseId: ID!,
+    name: String,
+    instructorName: String
+}
+
+type Student{
+    studentId: ID!,
+    forename: String,
+    surname: String,
+    course: Course
+}
+
+schema {
+    query: Query,
+    mutation: Mutation
+}
+
+type Query{
+    allCourse: [Course],
+    allStudent: [Student]
+}
+
+input CourseInput{
+    name: String,
+    instructorName: String
+}
+
+input CourseIdInput{
+    courseId: ID!
+}
+
+input StudentInput{
+    forename: String,
+    surname: String,
+    course: CourseIdInput
+}
+
+input CourseUpdateInput{
+    courseId: ID!,
+    name: String,
+    instructorName: String
+}
+
+input StudentUpdateInput{
+    studentId: ID!,
+    forename: String,
+    surname: String,
+    course: CourseIdInput
+}
+
+type Mutation{
+    addCourse(course:CourseInput):Course,
+    addStudent(student:StudentInput):Student,
+    updateCourse(course:CourseUpdateInput):Course,
+    updateStudent(student:StudentUpdateInput):Student,
+    deleteCourse(courseId:Int):Int,
+    deleteStudent(studentId:Int):Int
+}
